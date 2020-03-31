@@ -3,23 +3,22 @@
 #include <sstream>
 #include <vector>
 #include <array>
-
+#include <fstream>
 #include "../include/sudoku.h"
+#include "../include/readFile.h"
 
 
-int main(void){
+int main(int argc, char const *argv[]){
 
     std::vector<BOARD> boards;
-    BOARD temp_board;
+    
+    //Opening file
+    std::ifstream ifs;
+    openIfs(argv[1], ifs);
 
-    while(!std::cin.eof()){
-    	for (int i = 0; i < SIZE; ++i){
-    		for(int j{0}; j < SIZE; ++j){
-    			std::cin >> temp_board[i][j];
-    		}
-    	}
-    	boards.push_back(temp_board);
-    }
+    //Reading file
+    readIfs(ifs, boards);
+
     
     for(int i{0}; i < boards.size()-1; ++i){
         std::cout << "Board " << i+1 << ":\n";
