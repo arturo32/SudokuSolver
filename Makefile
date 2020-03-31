@@ -11,7 +11,7 @@ mkobjects:
 # main.cpp to work. It then compiles everything and creates
 # the executable sudoku in the build directory.
 main: readFile sudoku src/main.cpp
-		g++ src/main.cpp objects/*.o -o build/sudoku
+		g++ src/main.cpp objects/*.o -o sudoku
 
 readFile: src/readFile.cpp
 		g++ -c src/readFile.cpp -o objects/readFile.o
@@ -24,6 +24,6 @@ sudoku: src/sudoku.cpp
 # the executable file sudoku
 clean: 
 		rm -rf objects
-		rm build/sudoku
+		rm sudoku
 
 
