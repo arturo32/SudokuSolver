@@ -1,3 +1,4 @@
+
 #The command "make" will call the targets mkobjects and main.
 all: mkobjects main
 
@@ -15,8 +16,8 @@ main: readFile sudoku src/main.cpp
 readFile: src/readFile.cpp
 		g++ -c src/readFile.cpp -o objects/readFile.o
 
-sudoku: src/solver.cpp
-		g++ -c src/solver.cpp -o objects/solver.o
+sudoku: src/sudoku.cpp
+		g++ -c src/sudoku.cpp -o objects/sudoku.o
 
 
 # The command "make clean" removes the objects directory and
@@ -24,3 +25,5 @@ sudoku: src/solver.cpp
 clean: 
 		rm -rf objects
 		rm sudoku
+
+
