@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]){
     for(int i{0}; i < boards.size()-1; ++i){
         std::cout << "Board " << i+1 << ":\n";
         print(boards[i]);
-        solveSudoku(boards[i], 0, 0);
+        std::cout << solveSudoku(boards[i], 0, 0);
         std::cout << "\nResult:\n";
         print(boards[i]);
         std::cout << "\n\n\n";

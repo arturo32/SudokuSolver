@@ -3,14 +3,16 @@
 #include <sstream>
 #include <vector>
 #include <array>
+#include <math.h> 
 #include "../include/solver.h"
 
 
 
 bool check(BOARD matrix, int x, int y){
 
+
 	//Checking for repetitions in a collunm
-	for(int i{0}; i < 9; ++i){
+	for(int i{0}; i < SIZE; ++i){
 		if(i == x) continue;
 		if(matrix[i][y] == matrix[x][y]){
 			return false;
@@ -18,21 +20,23 @@ bool check(BOARD matrix, int x, int y){
 	}
 
 	//Checking for repetitions in a row
-	for(int i{0}; i < 9; ++i){
+	for(int i{0}; i < SIZE; ++i){
 		if(i == y) continue;
 		if(matrix[x][i] == matrix[x][y]){
 			return false;
 		}
 	}
 
+	int smallSIZE = sqrt(SIZE);
+
 	//Locating the (x,y) number in relation to the 3x3 square
-	int px = (x/3)*3;
-	int py = (y/3)*3;
+	int px = (x/smallSIZE) * smallSIZE;
+	int py = (y/smallSIZE) * smallSIZE;
 
 	/*Looking for repetitions of the (x,y) number inside the 
 	3x3 square*/
-	for(int i{px}; i < px+3; ++i){
-		for(int j{py}; j < py+3; ++j){
+	for(int i{px}; i < px+smallSIZE; ++i){
+		for(int j{py}; j < py+smallSIZE; ++j){
 			if(i == x && j == y) continue;
 			if(matrix[i][j] == matrix[x][y]){
 				return false;
@@ -52,7 +56,7 @@ bool solveSudoku(BOARD& board, int x, int y){
 
     /*If the end of the column was not reached, we keep in the
     same column and advance to the next row*/
-    if(x < 8){
+    if(x < SIZE-1){
         nextX = x+1;
         nextY = y;          
     }
@@ -60,7 +64,7 @@ bool solveSudoku(BOARD& board, int x, int y){
     beyond the number of columns, we advance to next column
     and reset the row number*/
     else{
-        if(y <= 8){
+        if(y <= SIZE-1){
             nextY = y+1;
             nextX = 0;
         }
@@ -83,7 +87,7 @@ bool solveSudoku(BOARD& board, int x, int y){
     /*Test for each number from 1 to 9 if it is valid
     following the rules of sudoku for the current
     position (x, y)*/
-    for(int i = 1; i < 10; ++i){
+    for(int i = 1; i <= SIZE; ++i){
         
         //Putting number in the board
         board[x][y] = i;
